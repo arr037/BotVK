@@ -12,7 +12,8 @@ namespace Api.Models
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         [Key]
         public long Id { get; set; }
-        public Group Group { get; set; } = new Group();
+        public Group Group { get; set; }
+        public int? GroupId { get; set; }
         public TimeTable TimeTable { get; set; } 
         public bool IsSignedGroup { get; set; }
     }

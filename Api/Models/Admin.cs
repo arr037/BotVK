@@ -13,5 +13,6 @@ namespace Api.Models
         [Key]
         public int Id { get; set; }
         public long UserId { get; set; }
+        public int? GroupId { get; set; }
     }
 }

@@ -25,6 +25,9 @@ namespace Api.Engine
             new ModifierUserList(),
             new ModifierEnterIDAdmin(),
 
+            new ModifierLeaveGroup(),
+            new ModifierLeaveGroupAnswerYes(),
+
             new ModifierHelp(),
             new ModifierUnknown()
         };
@@ -40,13 +43,14 @@ namespace Api.Engine
             {
                 user = new User
                 {
-                    Id = userId
+                    Id = userId,
                 };
+                
                 db.Users.Add(user);
                 db.SaveChanges();
             }           
             
-            if (string.IsNullOrEmpty(user.Group.Name))
+            if (user.Group!=null && user.IsSignedGroup==true)
             {
                 var CurentGroup = db.Users.Where(x => x.Id == userId).Select(x => x.Group).FirstOrDefault();
 

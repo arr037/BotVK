@@ -29,7 +29,7 @@ namespace Api.Engine.Modifiers
                     UserId = request.PeerId
                 };
             }
-            var b =state.User.Group.Admins;
+
             if (!state.User.Group.Admins.Any(x => x.UserId == request.FromId))
             {
                 return new ApiResponse

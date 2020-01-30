@@ -15,12 +15,13 @@ namespace Api.Engine.Modifiers
 
         protected override ApiResponse Respont(SimleApiRequest request, State state)
         {
-            using var db = new DatabaseContext();
+           
             long value=0;
             var ch = long.TryParse(request.Text, out value) ;
 
             if (ch && value!=0)
             {
+                using var db = new DatabaseContext();
                 var checkuser = db.Users.Where(x => x.Id == value).Select(x => x.Group.Name == state.User.Group.Name).FirstOrDefault();
                 
                 if (!checkuser)
@@ -30,6 +31,15 @@ namespace Api.Engine.Modifiers
                         Text = "Вы не можете добавить этого пользователя, так как он не состоит в группе",
                         UserId = request.PeerId,
                         KeyBoard = GenerateKeyBoard(Keyboards.ListGroup)
+                    };
+                }
+
+                if (db.Admins.Any(x => x.UserId == value))
+                {
+                    return new ApiResponse
+                    {
+                        Text = "Такой пользователь уже есть в админах",
+                        UserId = request.PeerId,
                     };
                 }
 

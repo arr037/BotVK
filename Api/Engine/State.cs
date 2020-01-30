@@ -18,6 +18,7 @@ namespace Api.Engine
         CreateNewGroup,
         AwaitEnterGroupName,
         AwaitJoinGroup,
-        AwaitAddNewAdmin
+        AwaitAddNewAdmin,
+        AwaitLeaveGroup
     }
 }
